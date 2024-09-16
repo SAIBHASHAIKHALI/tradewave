@@ -1,0 +1,37 @@
+CREATE TABLE `blueocean`.`operation` ( `operation_id` INT NOT NULL AUTO_INCREMENT ,  `date` DATE NOT NULL ,  `location` VARCHAR(30) NOT NULL ,  `particular` VARCHAR(30) NOT NULL ,  `quantity` DOUBLE NOT NULL ,  `cost_of_machine_operation` DOUBLE NOT NULL ,  `diesel_cost` DOUBLE NOT NULL ,  `oil_cost` DOUBLE NOT NULL ,  `other_costs` DOUBLE NOT NULL ,  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL ,  `is_deleted` TINYINT NOT NULL DEFAULT '0' ,    PRIMARY KEY  (`operation_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `blueocean`.`production` ( `production_id` INT NOT NULL AUTO_INCREMENT ,  `date` DATE NOT NULL ,  `location` VARCHAR(30) NOT NULL ,  `product_name` VARCHAR(30) NOT NULL ,  `quantity` DOUBLE NOT NULL ,  `production_analysis_id` INT NOT NULL ,  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL ,  `is_deleted` TINYINT NOT NULL DEFAULT '0' ,    PRIMARY KEY  (`production_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `blueocean`.`production_analysis` ( `production_analysis_id` INT NOT NULL AUTO_INCREMENT ,  `component_id` INT NOT NULL ,  `value` VARCHAR(40) NOT NULL ,    PRIMARY KEY  (`production_analysis_id`)) ENGINE = InnoDB;
+
+ALTER TABLE `production`
+  DROP `production_analysis_id`;
+
+ALTER TABLE `production_analysis` ADD `production_id` INT NOT NULL AFTER `production_analysis_id`; 
+
+CREATE TABLE `blueocean`.`procurement` ( `procurement_id` INT NOT NULL AUTO_INCREMENT ,  `date` DATE NOT NULL ,  `po_no` VARCHAR(50) NOT NULL ,  `raw_material` INT NOT NULL ,  `quantity` DOUBLE NOT NULL ,  `unit_of_measurement` VARCHAR(40) NOT NULL ,  `price` DOUBLE NOT NULL ,  `currency` VARCHAR(40) NOT NULL ,  `exchange_rate` DOUBLE NOT NULL ,  `supplier_name` INT NOT NULL ,  `specs` VARCHAR(50) NOT NULL ,  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL ,  `is_delete` TINYINT NOT NULL DEFAULT '0' ,    PRIMARY KEY  (`procurement_id`)) ENGINE = InnoDB;
+
+//29-07-2020
+
+ALTER TABLE `dispatch` ADD `date` DATE NOT NULL AFTER `product_name`; 
+
+ALTER TABLE `dispatch` ADD `mine_location` VARCHAR(50) NOT NULL AFTER `product_name`; 
+
+ALTER TABLE `procurement` ADD `mine_location` INT NOT NULL AFTER `raw_material`; 
+
+ALTER TABLE `procurement` ADD CONSTRAINT `ml3` FOREIGN KEY (`mine_location`) REFERENCES `mine_location`(`mine_location_id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+
+//30/07/2020
+
+CREATE TABLE `blueocean`.`daily_works` ( `daily_works_id` INT NOT NULL AUTO_INCREMENT ,  `date` DATE NOT NULL ,  `nature_of_job` VARCHAR(90) NOT NULL ,  `location` TEXT NOT NULL ,  `mine_location` INT NOT NULL ,  `resources_employed` TEXT NOT NULL ,  `distance_travelled` VARCHAR(80) NOT NULL ,  `vehicles_used` VARCHAR(80) NOT NULL ,  `cost_incurred` DOUBLE NOT NULL ,  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL ,  `is_delete` TINYINT NOT NULL DEFAULT '0' ,    PRIMARY KEY  (`daily_works_id`)) ENGINE = InnoDB;
+
+
+
+ALTER TABLE `daily_works` ADD CONSTRAINT `ml4` FOREIGN KEY (`mine_location`) REFERENCES `mine_location`(`mine_location_id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+
+CREATE TABLE `blueocean`.`maintenance` ( `maintenance` INT NOT NULL ,  `mine_location` INT NOT NULL ,  `nature_of_maintenance` ENUM('Vehicle','Electrical','Mechanical','Other') NOT NULL ,  `type_of_maintenance` ENUM('Scheduled','Breakdown') NOT NULL ,  `details` TEXT NOT NULL ,  `equipment` TEXT NOT NULL ,  `resources_employed` VARCHAR(100) NOT NULL ,  `cost_of_maintenance` DOUBLE NOT NULL ,  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL ,  `is_delete` TINYINT NULL DEFAULT '0' ) ENGINE = InnoDB;
+
+ALTER TABLE `maintenance` CHANGE `maintenance` `maintenance_id` INT(11) NOT NULL AUTO_INCREMENT; 
+
+ALTER TABLE `maintenance` ADD `date` DATE NOT NULL AFTER `maintenance_id`; 
+
