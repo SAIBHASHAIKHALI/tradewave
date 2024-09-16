@@ -44,6 +44,7 @@ $fieldOptions2 = [
                 <button type="button" class="btn btn-secondary" onclick="fillUsername('HR')">HR</button>
                 <button type="button" class="btn btn-secondary" onclick="fillUsername('Employee')">Employee</button>
                 <button type="button" class="btn btn-secondary" onclick="fillUsername('Accountant')">Accountant</button>
+                <button type="button" class="btn btn-secondary" onclick="fillUsername('Clients')">Clients</button>
             </div>
 
             <div class="row" style="margin-top: 15px;">

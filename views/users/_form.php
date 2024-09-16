@@ -107,7 +107,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'image')->fileInput(['class' => 'custom-file-input'])->label("Upload Profile Picture") ?>
     </div>
 
-    <?= $form->field($model, 'level')->dropDownList(['1' => 'Admin',  '2' => 'Accountant','3'=>'HR','4'=>'Employee'], ['class' => 'form-control']) ?>
+    <?= $form->field($model, 'level')->dropDownList(['1' => 'Admin',  '2' => 'Accountant','3'=>'HR','4'=>'Employee', '5' => 'Client'], ['class' => 'form-control']) ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

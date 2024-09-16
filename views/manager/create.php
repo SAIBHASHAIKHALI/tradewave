@@ -6,7 +6,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Manager */
 
 $this->title = 'Create Manager';
-
 ?>
 <div class="manager-create">
 

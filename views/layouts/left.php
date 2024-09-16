@@ -184,6 +184,25 @@ body.skin-blue .main-sidebar .treeview-menu li a:hover {
                 ]
             );
 
+            echo dmstr\widgets\Menu::widget(
+                [
+                    'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
+                    'items' => [
+                        [
+                            'label' => 'Request A Services',
+                            'icon' => 'bug',
+                            'url' => '#',
+                            'items' => [
+                              
+                                ['label' => 'Request', 'icon' => 'circle-o', 'url' => ['/service'],],
+                                
+                                
+                                
+                            ],
+                        ],
+                    ],
+                ]
+            );
 
            
 
@@ -317,6 +336,7 @@ body.skin-blue .main-sidebar .treeview-menu li a:hover {
                     ],
                 ]
             ); 
+ 
 
             
 
@@ -354,6 +374,51 @@ body.skin-blue .main-sidebar .treeview-menu li a:hover {
                               
                                 ['label' => 'Leave Requests', 'icon' => 'circle-o', 'url' => ['/leave-requests'],],
                                 
+                                
+                            ],
+                        ],
+                    ],
+                ]
+            ); 
+
+            
+
+        }
+
+
+
+        else if (Yii::$app->user->identity->level == 5)   
+            {
+            
+         
+
+
+            echo dmstr\widgets\Menu::widget(
+                [
+                    'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
+                    'items' => [
+                        [
+                            'label' => 'Dashboard',
+                            'icon' => 'book',
+                            'url' => ['/site/index'],
+                        ],
+                    ],
+                ]
+            );
+           
+
+            echo dmstr\widgets\Menu::widget(
+                [
+                    'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
+                    'items' => [
+                        [
+                            'label' => 'Request A Services',
+                            'icon' => 'bug',
+                            'url' => '#',
+                            'items' => [
+                              
+                                ['label' => 'Request', 'icon' => 'circle-o', 'url' => ['/service/create'],],
+                                ['label' => 'Check status', 'icon' => 'circle-o', 'url' => ['/service/user-services'],],
                                 
                             ],
                         ],
