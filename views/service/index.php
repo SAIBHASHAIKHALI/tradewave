@@ -40,11 +40,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td>
                         <?= Html::a('<i class="scalar-icon-eye"></i> View', ['view', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
                         <?= Html::a('<i class="scalar-icon-pencil"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                        <?= Html::a('<i class="scalar-icon-trash"></i> Delete', ['delete', 'id' => $model->id], [
-                            'class' => 'btn btn-danger btn-sm',
-                            'data-confirm' => 'Are you sure you want to delete this item?',
-                            'data-method' => 'post',
-                        ]) ?>
+                        <?php if (Yii::$app->user->identity->level == 1): ?>
+        <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm custom-btn',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this user?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    <?php endif; ?>
                         <?= Html::a('<i class="scalar-icon-check"></i> Approve', ['approve', 'id' => $model->id], [
                             'class' => 'btn btn-success btn-sm',
                             'data-method' => 'post',

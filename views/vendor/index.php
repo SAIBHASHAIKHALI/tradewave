@@ -40,6 +40,15 @@ $this->title = 'Vendors';
                     <td>
                         <?= Html::a('<i class="fa fa-eye" aria-hidden="true"></i> View', ['view', 'id' => $model->vendor_id], ['class' => 'btn btn-primary btn-sm custom-btn']) ?>
                         <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $model->vendor_id], ['class' => 'btn btn-secondary btn-sm custom-btn']) ?>
+                        <?php if (Yii::$app->user->identity->level == 1): ?>
+        <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->vendor_id], [
+            'class' => 'btn btn-danger btn-sm custom-btn',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this user?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

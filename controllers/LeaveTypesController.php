@@ -35,6 +35,7 @@ class LeaveTypesController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->isGuest) {
         $searchModel = new SearchLeaveTypes();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -42,6 +43,11 @@ class LeaveTypesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    else
+    {
+        return $this->redirect(['/site/index']);
+    }
     }
 
     /**

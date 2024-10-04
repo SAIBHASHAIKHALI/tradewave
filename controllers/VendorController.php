@@ -35,6 +35,7 @@ class VendorController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->isGuest) {
         $searchModel = new SearchVendor();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -42,6 +43,11 @@ class VendorController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    else
+    {
+        return $this->redirect(['/site/index']);
+    }
     }
 
     /**

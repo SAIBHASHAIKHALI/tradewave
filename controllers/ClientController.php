@@ -103,6 +103,8 @@ class ClientController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->isGuest) {
+
         $model = new Client();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -119,6 +121,10 @@ class ClientController extends Controller
             'model' => $model,
         ]);
     }
+    else {
+        return $this->redirect(['/site/index']);
+    }
+    }
 
 
 
@@ -132,6 +138,7 @@ class ClientController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->isGuest) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -142,6 +149,11 @@ class ClientController extends Controller
             'model' => $model,
         ]);
     }
+    else
+    {
+        return $this->redirect(['/site/index']);
+    }
+}
 
     /**
      * Deletes an existing Client model.

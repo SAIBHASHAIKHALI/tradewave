@@ -372,7 +372,8 @@ body.skin-blue .main-sidebar .treeview-menu li a:hover {
                             'url' => '#',
                             'items' => [
                               
-                                ['label' => 'Leave Requests', 'icon' => 'circle-o', 'url' => ['/leave-requests'],],
+                                ['label' => 'Apply Leaves', 'icon' => 'circle-o', 'url' => ['/leave-requests/create'],],
+                                ['label' => 'Your Leave Requests', 'icon' => 'circle-o', 'url' => ['/leave-requests'],],
                                 
                                 
                             ],

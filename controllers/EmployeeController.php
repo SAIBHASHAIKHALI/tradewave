@@ -35,6 +35,7 @@ class EmployeeController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->isGuest) {
         $searchModel = new SearchEmployee();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -42,6 +43,10 @@ class EmployeeController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    else {
+        return $this->redirect(['/site/index']);
+    }
     }
 
     /**
@@ -64,6 +69,7 @@ class EmployeeController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->isGuest) {
         $model = new Employee();
     
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -74,6 +80,11 @@ class EmployeeController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+    else
+    {
+        return $this->redirect(['/site/index']);
+    }
     }
     
 

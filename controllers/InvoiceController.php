@@ -59,14 +59,11 @@ class InvoiceController extends Controller
     {
         if(!Yii::$app->user->isGuest){
             $model = $this->findModel($id);
-            $id = Yii::$app->user->identity->user_id;
-            if($model->user_id == $id){
+           
                 return $this->render('view', [
                     'model' => $model,
                 ]);
-            }else{
-                throw new \yii\web\ForbiddenHttpException;
-            } 
+           
         }else{
             throw new \yii\web\ForbiddenHttpException;
         } 

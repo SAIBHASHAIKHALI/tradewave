@@ -35,6 +35,7 @@ class ServiceController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->isGuest) {
         $searchModel = new SearchService();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -42,6 +43,11 @@ class ServiceController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    else
+    {
+        return $this->redirect(['/site/index']);
+    }
     }
 
     /**
@@ -64,6 +70,7 @@ class ServiceController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->isGuest) {
         $model = new Service();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +80,11 @@ class ServiceController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+    else
+    {
+        return $this->redirect(['/site/index']);
+    }
     }
 
     /**

@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->payment_status == 1 ? "Paid" : "Not Paid";
                 }
             ],
-            'client.name',
+            'client.companyname',
         ],
     ]) ?>
 

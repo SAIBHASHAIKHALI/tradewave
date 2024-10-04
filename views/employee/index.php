@@ -40,6 +40,15 @@ $this->title = 'Employees';
                     <td>
                         <?= Html::a('View', ['view', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm custom-btn']) ?>
                         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm custom-btn']) ?>
+                        <?php if (Yii::$app->user->identity->level == 1): ?>
+        <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger btn-sm custom-btn',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this user?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    <?php endif; ?>
                       
                     </td>
                 </tr>
